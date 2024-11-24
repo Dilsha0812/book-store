@@ -8,6 +8,7 @@ import { LuShoppingCart } from "react-icons/lu";
 
 import avatarImg from "../assets/avatar.png"
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const navigation = [
     {name:"Dashboard", href:"/dashboard"},
@@ -19,7 +20,8 @@ const navigation = [
 const navbar = () => {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    console.log(isDropdownOpen);
+    const cartItems = useSelector(state => state.cart.cartItems);
+    
     
 
     const currentUser = false;
@@ -77,7 +79,11 @@ const navbar = () => {
             </button>
             <Link to="/cart" className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm">
             <LuShoppingCart className=''/>
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            {
+                cartItems.length > 0 ? <span className="text-sm font-semibold sm:ml-1">{cartItems.length}</span> : <span className="text-sm font-semibold sm:ml-1">0</span>
+            }
+            
+            
             </Link>
             </div>
 
