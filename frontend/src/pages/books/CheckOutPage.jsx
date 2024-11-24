@@ -16,7 +16,23 @@ const CheckOutPage = () => {
       } = useForm()
 
       const [isChecked , setIsChecked] = useState(false)
-      const onSubmit = (data) => console.log(data)
+      const onSubmit = (data) => {
+        console.log(data);
+        const newOrder ={
+            name:data.name,
+            email:currentUser?.email,
+            address:{
+                city:data.city,
+                country:data.country,
+                state:data.state,
+                zipcode:data.zipcode
+            },
+            phone:data.phone,
+            productIds:cartItems.map(item => item?._id),
+            totalPrice:totalPrice
+        }
+        console.log(newOrder)
+      }
     
    
   return (
