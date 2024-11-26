@@ -20,14 +20,9 @@ const Topsellers = () => {
     const [selectedCategory, setSelectedCategory] = useState("choose a genre");
 
     const {data:books =[]} = useFetchAllBooksQuery();
-    console.log(books)
-    
-
-
+   
     const filteredBooks = selectedCategory === "choose a genre" ? books: books.filter(book=>book.category === selectedCategory.toLowerCase())
-    console.log(filteredBooks)
-    
-    
+   
   return (
     <div className='py-10'>
         <h2 className='text-3xl font-semibold mb-6'>Top Sellers</h2>
