@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCreateOrderMutation } from '../../redux/features/orders/ordersApi';
+import Swal from 'sweetalert2';
 
 const CheckOutPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems);
@@ -16,8 +18,11 @@ const CheckOutPage = () => {
         formState: { errors },
       } = useForm()
 
+      const [createOrder,{isLoading,error}]=useCreateOrderMutation();
+      const navigate = useNavigate()
+
       const [isChecked , setIsChecked] = useState(false)
-      const onSubmit = (data) => {
+      const onSubmit = async(data) => {
         console.log(data);
         const newOrder ={
             name:data.name,
@@ -32,8 +37,26 @@ const CheckOutPage = () => {
             productIds:cartItems.map(item => item?._id),
             totalPrice:totalPrice
         }
-        console.log(newOrder)
+        try {
+            await createOrder(newOrder).unwrap();
+            Swal.fire({
+                title: "Confirmed order",
+                text: "Your order placed successfully!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, It's OK"
+              });
+              navigate("/orders")
+        } catch (error) {
+            console.error("Error place an order", error)
+            alert("Failed to place an order")
+            
+        }
       }
+
+      if(isLoading) return <div>Loading...</div>
     
    
   return (
@@ -48,7 +71,7 @@ const CheckOutPage = () => {
             </div>
             
                 <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                    <form onSubmit={handleSubmit(onsubmit)} className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3 my-8">
+                    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3 my-8">
                         <div className="text-gray-600">
                             <p className="font-medium text-lg">Personal Details</p>
                             <p>Please fill out all the fields.</p>

@@ -7,6 +7,8 @@ import CartPage from "../pages/books/CartPage";
 import CheckOutPage from "../pages/books/CheckOutPage";
 import SingleBook from "../pages/books/SingleBook";
 import PrivateRoute from "./PrivateRoute";
+// import OrderPage from "../pages/books/orderPage";
+
 
 
 
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
         },
         {
             path: "/orders",
-            element: <div>Orders</div>
+            element: <div className="text-2xl font-semibold mb-4 flex justify-between items-center">Your orders are successfull</div>
         },
         {
             path: "/about",
@@ -47,7 +49,8 @@ const router = createBrowserRouter([
       {
         path: "/books/:id",
         element: <SingleBook/>
-      }
+      },
+      
       
       ]
     },
