@@ -91,13 +91,23 @@ const Login = () => {
             Haven't an account? Please
             <Link to="/register" className='text-blue-500 hover:text-blue-800'> Register</Link>
         </p>
-        <div 
+        {/* <div 
         onClick={handleGoogleSignIn}
         className="mt-4">
             <button
                 className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 
             >
+                <FaGoogle className="mr-2" />
+                Sign in with Google
+            </button>
+        </div> */}
+        <div className="mt-4">
+        <button
+                onClick={handleGoogleSignIn}
+                className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                
+            
                 <FaGoogle className="mr-2" />
                 Sign in with Google
             </button>
