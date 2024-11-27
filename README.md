@@ -1,4 +1,4 @@
-The *BookNest* is a user-friendly platform where users can browse, filter, and purchase books, while admins can manage the book inventory. 
+The *BookNest* is a user-friendly book store platform where users can browse, filter, and purchase books, while admins can manage the book inventory. 
 This application is built using the **MERN Stack** (MongoDB, Express.js, React, Node.js).
 
 
